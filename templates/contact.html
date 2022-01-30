@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
+    <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+    <title>ZielonoNam 2022</title>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <img src="{% static 'images/logo.png' %}" id="logo">
+          <a role="button" class="navbar-burger is_large" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start" >
+            <a class="navbar-item" href="{% url 'index' %}">
+              Home
+            </a>
+            <a class="navbar-item" href="">
+              O nas
+            </a>
+            <a class="navbar-item" href="">
+                Posty
+              </a>
+            <a class="navbar-item" href="">
+                Newsletter
+              </a>
+          </div>
+        </div>
+      </nav>
+      <div id="main_header">
+        <h1>Kontakt</h1>
+      </div>
+      <main>
+        <div id="contact_div">
+                <div id="cont_2">
+                    <div id='social_links'>
+                        <div class="social_link">
+                            <i class="fab fa-instagram"></i>
+                            <h2 class="social_link"> <a href="https://www.instagram.com/zielononam2022/" target="_blank">@zielononam2022</a></h2>
+                        </div>
+                        <div class="social_link">
+                            <i class="fab fa-facebook"></i>
+                            <h2 class="social_link"> <a href=" https://www.facebook.com/profile.php?id=100077325723288" target="_blank">Zielono Nam</a></h2>
+                        </div>
+                        <div class="social_link">
+                            <i class="fas fa-inbox"></i>
+                            <h2 class="social_link"> <a href="mailto:zielononam@gmail.com">zielononam@gmail.com</a></h2>
+                        </div>
+                    </div>
+                    <div id="ilustration_div">
+                        <img src="{% static 'images/hipster-man-with-social-media (1).png' %}" width="400px">
+                    </div>
+                </div>
+        </div>
+      </main>
+</body>
+<script src="{% static 'js/burger.js' %}"></script>
+</html>

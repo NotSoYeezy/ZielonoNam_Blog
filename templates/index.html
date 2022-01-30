@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <title>ZielonoNam 2022</title>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <img src="{% static 'images/logo.png' %}" id="logo">
+          <a role="button" class="navbar-burger is_large" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start" >
+            <a class="navbar-item" href="">
+              Posty
+            </a>
+            <a class="navbar-item" href="">
+              O nas
+            </a>
+            <a class="navbar-item" href="{% url 'contact' %}">
+                Kontakt
+              </a>
+            <a class="navbar-item" href="">
+                Newsletter
+              </a>
+          </div>
+        </div>
+      </nav>
+      <div id="main_header">
+        <h1>Zielono Nam 2022</h1>
+      </div>
+      <main>
+        <div data-tilt data-tilt-scale="1.1" class="container" style="padding-top:15px; padding-left: 15px; padding-right: 15px;">
+          <img src="{% static 'images/hat.png' %}" style="margin-bottom: 110px;">
+          <div class='text_div' style="border-top:2px solid black;">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+              molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+              numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+              optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+              obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam</p>
+          </div>
+        </div>
+        <div data-tilt data-tilt-scale="1.1" class="container">
+            <img src="{% static 'images/magnifier.png' %}" width="250px" style="margin-top: 5px;">
+            <div class='text_div' style="border-top:2px solid black;">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+                obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam</p>
+            </div>
+        </div>
+        <div data-tilt data-tilt-scale="1.1" class="container">
+          <img src="{% static 'images/board.png' %}" style="margin-left: 20px; margin-top: 20px;">
+          <div class='text_div' style="border-top:2px solid black;">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+              molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+              numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+              optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+              obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam</p>
+          </div>
+      </main>
+</body>
+<script src="{% static 'js/burger.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js" integrity="sha512-K9tDZvc8nQXR1DMuT97sct9f40dilGp97vx7EXjswJA+/mKqJZ8vcZLifZDP+9t08osMLuiIjd4jZ0SM011Q+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</html>
