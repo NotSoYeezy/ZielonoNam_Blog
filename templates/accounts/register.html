@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico"' %}/>
+    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
     <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
@@ -24,7 +24,7 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start" >
-            <a class="navbar-item" href="{% url 'index' %}">
+            <a class="navbar-item" href="index.html">
               Home
             </a>
             <a class="navbar-item" href="">
@@ -33,9 +33,9 @@
             <a class="navbar-item" href="">
                 Posty
               </a>
-            <a class="navbar-item" href="">
+            <a class="navbar-item" href="newsletter.html">
                 Newsletter
-              </a>
+              </a>s
           </div>
         </div>
       </nav>
@@ -45,22 +45,11 @@
       <main>
         <div class="" id='login_cont'>
             <h2>ADMIN</h2>
-            
-            <span><a id="inactive">Zaloguj się</a><a href='' id="active">Zarejestruj się</a></span>
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+            <span><a href="login.html" id="active">Zaloguj się</a><a id="inactive">Zarejestruj się</a></span>
             <form method="POST">
-              <input id='username' name="username" class='form_inp' type="text" placeholder="Nazwa użytkownika">
-              <br>
-              <input id='password' name='password' class='form_inp' type="password" placeholder="Hasło">
-              <br>
-              <button id='btn'>Zaloguj się</button>
+              {{form}}
               {% csrf_token %}
+              <button id='btn' type="submit">Zarejestruj się</button>
             </form>
         </div>
       </main>
