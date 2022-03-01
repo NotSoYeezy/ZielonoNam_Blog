@@ -17,10 +17,18 @@ from unicodedata import name
 from django.contrib import admin
 from django.urls import path, include
 import ZielonoNam.views as main_views
+from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_views.IndexView.as_view(), name='index'),
     path('contact/', main_views.ContactView.as_view(), name='contact'),
+
     path('user/', include('accounts.urls')),
+    path('posts/', include('Posts.urls'))
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_PATH)

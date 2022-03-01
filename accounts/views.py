@@ -29,7 +29,6 @@ class UserLoginView(View):
             messages.error(request, "Złe hasło lub nazwa użytkownika")
             return render(request, 'accounts/login.html', {})
 
-
     def get(self, request):
         return render(request, 'accounts/login.html', {})
 
@@ -43,10 +42,10 @@ class LogOutView(View, LoginRequiredMixin):
 
 
 def user_register_view(request):
-    user_form = UserRegisterForm()
+    user_form = UserRegisterForm
 
     if request.method == 'POST':
-        user_form = UserRegisterForm(request.POST)
+        user_form = UserRegisterForm(request.POST, request.FILES)
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)

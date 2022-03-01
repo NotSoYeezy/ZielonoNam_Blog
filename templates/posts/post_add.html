@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico"' %}/>
-    <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
     <title>ZielonoNam 2022</title>
 </head>
@@ -22,48 +21,44 @@
             <span aria-hidden="true"></span>
           </a>
         </div>
+
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start" >
             <a class="navbar-item" href="{% url 'index' %}">
               Home
             </a>
+            <a class="navbar-item" href="{% url 'Posts:post_list' %}">
+              Posty
+            </a>
             <a class="navbar-item" href="">
               O nas
             </a>
-            <a class="navbar-item" href="">
-                Posty
-              </a>
-            <a class="navbar-item" href="">
-                Newsletter
+            <a class="navbar-item" href="{% url 'contact' %}">
+                Kontakt
               </a>
           </div>
         </div>
       </nav>
       <div id="main_header">
-        <h1></h1>
+          <h1>Dodaj post</h1>
       </div>
       <main>
-        <div class="" id='login_cont'>
-            <h2>ADMIN</h2>
-            
-            <span><a id="inactive">Zaloguj się</a><a href='' id="active">Zarejestruj się</a></span><br>
-            <a href="{% url 'accounts:password_reset' %}">Zresetuj hasło</a>
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            <form method="POST" enctype="multipart/form-data">
-              <input id='username' name="username" class='form_inp' type="text" placeholder="Nazwa użytkownika">
-              <br>
-              <input id='password' name='password' class='form_inp' type="password" placeholder="Hasło">
-              <br>
-              <button id='btn' type="submit">Zaloguj się</button>
-              {% csrf_token %}
+        <div class="post_cont" style="text-align: center">
+            <form method="post" >
+                {{ form.as_p }}
+                {{ form.media }}
+                <button id='btn' type="submit">Zapisz</button>
             </form>
         </div>
+          <style>
+              label{
+                  flex-direction: column;
+                  text-align: center;
+              }
+              input[type=text]{
+                  margin-bottom: 30px;
+              }
+          </style>
       </main>
 </body>
 <script src="{% static 'js/burger.js' %}"></script>

@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
-    <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
     <title>ZielonoNam 2022</title>
 </head>
 <body>
@@ -22,35 +20,35 @@
             <span aria-hidden="true"></span>
           </a>
         </div>
+
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start" >
-            <a class="navbar-item" href="index.html">
+            <a class="navbar-item" href="{% url 'index' %}">
               Home
+            </a>
+            <a class="navbar-item" href="{% url 'Posts:post_list' %}">
+              Posty
             </a>
             <a class="navbar-item" href="">
               O nas
             </a>
-            <a class="navbar-item" href="">
-                Posty
+            <a class="navbar-item" href="{% url 'contact' %}">
+                Kontakt
               </a>
-            <a class="navbar-item" href="newsletter.html">
-                Newsletter
-              </a>s
           </div>
         </div>
       </nav>
       <div id="main_header">
-        <h1></h1>
       </div>
       <main>
-        <div class="" id='login_cont' style="height: 450px">
-            <h2>ADMIN</h2>
-            <span><a href="login.html" id="active">Zaloguj się</a><a id="inactive">Zarejestruj się</a></span>
-            <form method="POST" enctype="multipart/form-data">
-              {{form.as_p}}
-              {% csrf_token %}
-              <button id='btn' type="submit">Zarejestruj się</button>
-            </form>
+        <div class="post_cont" >
+            <h2 id="tittle">{{ post.title }}</h2>
+            <h2>Autor: <a href="#">{{ post.author }}</a></h2>
+            <h2>Napisane: {{ post.create_date }}</h2>
+            <hr>
+            <div id="post_text">
+                <p>{{ post.content|safe }}</p>
+            </div>
         </div>
       </main>
 </body>

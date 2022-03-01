@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
     'accounts',
     'Posts',
     'Newsletter',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ROOT_URLCONF = 'ZielonoNam.urls'
 
@@ -106,12 +110,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 PASSWORD_HASHERS = [
-
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher'
-
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -138,6 +141,24 @@ STATIC_PATH = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
     STATIC_PATH
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Dropbox file system - config
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+
+if DEBUG:
+    # TODO: Separate Dropbox for development purposes
+    # DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+    # DROPBOX_OAUTH2_TOKEN = config('DROPBOX_KEY_DEV')
+    # DROPBOX_ROOT_PATH = r'/dev'
+    ...
+
+else:
+    # TODO: Separate Dropbox for production purposes
+    ...
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

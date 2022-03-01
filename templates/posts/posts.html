@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
+    <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">]
+    <link rel="stylesheet" href="{% static 'css/posts.css' %}" type="text/css">
+    <title>ZielonoNam 2022</title>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <img src="{% static 'images/logo.png' %}" id="logo">
+          <a role="button" class="navbar-burger is_large" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start" >
+            <a class="navbar-item" href="{% url 'index' %}">
+              Home
+            </a>
+            <a class="navbar-item" href="">
+              O nas
+            </a>
+            <a class="navbar-item" href="{% url 'contact' %}">
+                Kontakt
+              </a>
+              {% if user.is_authenticated %}
+            <a class="navbar-item" href="{% url 'Posts:post_create' %}">
+                Dodaj post
+              </a>
+              {% endif %}
+          </div>
+        </div>
+      </nav>
+      <main>
+        <div class='main_cont'>
+          <div class="arrow_div" id="back_div">{% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a>{% endif %}</div>
+        {% for post in page_obj  %}
+          <div class="post_div">
+            <div class="post_cont">
+              <div class="image_div">
+                <img src="{{ post.thumbnail.url }}" class="post_image">
+              </div>
+              <div class="post_content">
+                <span><h1 class="post_title">{{ post.title }}</h1><p class="post_date">{{ post.publish_date }}</p></span>
+                <a class="post_author">{{post.author.username}}</a>
+                <p class="post_text">
+                {{ post.content|slice:":100"|safe }}
+                 ... <a href="{% url 'Posts:post_detail' slug=post.slug %}">Kliknij po więcej</a>
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="arrow_div" id="next_div">{% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>{% endif %}</div>
+        </div>
+      </main>
+</body>
+<script src="{% static 'js/burger.js' %}"></script>
+</html>
