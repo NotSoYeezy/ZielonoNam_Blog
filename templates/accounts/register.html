@@ -45,7 +45,7 @@
       <main>
         <div class="" id='login_cont' style="height: 450px">
             <h2>ADMIN</h2>
-            <span><a href="login.html" id="active">Zaloguj się</a><a id="inactive">Zarejestruj się</a></span>
+            <span><a href="{% url 'accounts:login' %}" id="active">Zaloguj się</a><a id="inactive">Zarejestruj się</a></span>
             <form method="POST" enctype="multipart/form-data">
               {{form.as_p}}
               {% csrf_token %}

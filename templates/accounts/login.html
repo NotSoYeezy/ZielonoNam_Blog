@@ -46,7 +46,7 @@
         <div class="" id='login_cont'>
             <h2>ADMIN</h2>
             
-            <span><a id="inactive">Zaloguj się</a><a href='' id="active">Zarejestruj się</a></span><br>
+            <span><a id="inactive">Zaloguj się</a><a href='{% url 'accounts:register' %}' id="active">Zarejestruj się</a></span><br>
             <a href="{% url 'accounts:password_reset' %}">Zresetuj hasło</a>
             {% if messages %}
             <ul class="messages">

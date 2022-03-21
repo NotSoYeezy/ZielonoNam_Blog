@@ -33,10 +33,16 @@
             <a class="navbar-item" href="{% url 'contact' %}">
                 Kontakt
               </a>
+            {% if not user.is_authenticated %}
+            <a class="navbar-item" href="{% url 'accounts:login' %}">
+                Login
+              </a>
+            {% endif %}
               {% if user.is_authenticated %}
             <a class="navbar-item" href="{% url 'Posts:post_create' %}">
                 Dodaj post
               </a>
+            <a class="navbar-item" href="{% url 'Posts:post_draft_list' %}">Nieopublikowane</a>
               {% endif %}
           </div>
         </div>
@@ -48,14 +54,16 @@
           <div class="post_div">
             <div class="post_cont">
               <div class="image_div">
-                <img src="{{ post.thumbnail.url }}" class="post_image">
+                <img src="{{ post.cdn_url }}" class="post_image">
               </div>
               <div class="post_content">
                 <span><h1 class="post_title">{{ post.title }}</h1><p class="post_date">{{ post.publish_date }}</p></span>
                 <a class="post_author">{{post.author.username}}</a>
                 <p class="post_text">
                 {{ post.content|slice:":100"|safe }}
-                 ... <a href="{% url 'Posts:post_detail' slug=post.slug %}">Kliknij po więcej</a>
+                 ... {% if post.publish_date %}<a href="{% url 'Posts:post_detail' slug=post.slug %}">Kliknij po więcej</a>
+                    {% else %} <a href="{% url 'Posts:post_draft_detail' slug=post.slug %}">Kliknij po więcej</a>
+                {% endif %}
                 </p>
               </div>
               {% endfor %}

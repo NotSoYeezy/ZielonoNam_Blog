@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import pyrebase
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -145,20 +146,25 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Dropbox file system - config
-
-# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+# FireBase config
 
 if DEBUG:
-    # TODO: Separate Dropbox for development purposes
-    # DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-    # DROPBOX_OAUTH2_TOKEN = config('DROPBOX_KEY_DEV')
-    # DROPBOX_ROOT_PATH = r'/dev'
-    ...
+    PROFILE_PICS_DIR = config('PROFILE_PICS_DIR')
+    THUMBNAILS_DIR = config('THUMBNAILS_DIR')
 
-else:
-    # TODO: Separate Dropbox for production purposes
-    ...
+    config_debug = {
+        'apiKey':  config('DEBUG_API_KEY'),
+        'authDomain': config('DEBUG_AUTH_DOMAIN'),
+        'projectId':  config('DEBUG_PROJECT_ID'),
+        'storageBucket':  config('DEBUG_STORAGE_BUCKET'),
+        'messagingSenderId': config('DEBUG_MSG_SNDR_ID'),
+        'appId': config('DEBUG_APP_ID'),
+        'measurementId': config('DEBUG_MEAS_ID'),
+        'databaseURL': config('DEBUG_DB_URL'),
+    }
+
+    firebase = pyrebase.initialize_app(config_debug)
+    storage = firebase.storage()
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

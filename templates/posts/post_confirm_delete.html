@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+    <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
     <title>ZielonoNam 2022</title>
 </head>
 <body>
@@ -40,26 +41,16 @@
         </div>
       </nav>
       <div id="main_header">
-          <h1>Dodaj post</h1>
       </div>
       <main>
-        <div class="post_cont" style="text-align: center">
-            <form method="post" enctype="multipart/form-data">
-                {{ form.as_p }}
-                {{ form.media }}
+        <div class="post_cont" >
+            <h1 style="text-align: center">Napewno chcesz usunąc post: <strong>{{ post.title }}</strong>?</h1>
+            <form method="POST" style="text-align: center">
                 {% csrf_token %}
-                <button id='btn' type="submit">Zapisz</button>
+                <button id='btn' type="submit" style="color: Red">Tak</button>
+                <button id="btn"><a href="{% url 'Posts:post_detail' post.slug %}">Nie</a></button>
             </form>
         </div>
-          <style>
-              label{
-                  flex-direction: column;
-                  text-align: center;
-              }
-              input[type=text]{
-                  margin-bottom: 30px;
-              }
-          </style>
       </main>
 </body>
 <script src="{% static 'js/burger.js' %}"></script>

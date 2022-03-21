@@ -8,6 +8,7 @@
     <link rel="icon" type="image/icon" href="{% static 'images/icon2.ico' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
+    <script src="https://kit.fontawesome.com/88dec51e8e.js" crossorigin="anonymous"></script>
     <title>ZielonoNam 2022</title>
 </head>
 <body>
@@ -42,7 +43,7 @@
       </div>
       <main>
         <div class="post_cont" >
-            <h2 id="tittle">{{ post.title }}</h2>
+            <h2 id="tittle">{{ post.title }} {% if not post.publish_date%}<a href="{% url 'Posts:post_publish' slug=post.slug %}">[Opublikuj]</a>{% endif %} {% if user.is_authenticated %}<a href="{% url 'Posts:post_delete' post.slug %}"><i class="fas fa-trash-alt"></i></a>{% endif %}</h2>
             <h2>Autor: <a href="#">{{ post.author }}</a></h2>
             <h2>Napisane: {{ post.create_date }}</h2>
             <hr>

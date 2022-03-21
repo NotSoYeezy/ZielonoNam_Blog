@@ -10,6 +10,7 @@ class Post(models.Model):
     title = models.CharField(max_length=250, blank=False, null=False)
     content = HTMLField()
     thumbnail = models.ImageField(upload_to='thumbnails')
+    cdn_url = models.CharField(max_length=350)
     slug = models.SlugField(null=True, blank=True)
     create_date = models.DateField(auto_now_add=True)
     publish_date = models.DateField(null=True, blank=True)
@@ -25,3 +26,4 @@ class Post(models.Model):
 
     def publish(self):
         self.publish_date = datetime.datetime.now()
+        self.save()
