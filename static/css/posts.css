@@ -31,7 +31,7 @@
 
 .post_content{
     text-align: left;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-right: 10px;
 }
 
@@ -48,10 +48,6 @@
 
 .post_author{
     font-size: 20px;
-}
-
-ol li{
-    margin-left: 20px;
 }
 
 .arrow_div a{
@@ -74,4 +70,31 @@ ol li{
 .post_text{
     text-align: justify;
     margin:0;
+}
+
+@media (max-width:700px){
+    .post_div{
+        width: 450px;
+        height: 650px;
+        background-color: white;
+        text-align: center;
+        border-radius: 50px;
+        margin-bottom: 20px;
+        box-shadow: 4px 4px 6px 5px rgba(0, 0, 0, 0.25);
+    }
+    .post_image{
+        margin-top: 25px;
+        border-radius: 46px;
+        max-width:400px;
+        max-height:320px;
+        box-shadow: 4px 4px 10px 3px rgba(0, 0, 0, 0.25);
+        width: auto;
+        height: auto;
+    }
+
+    .fa-angle-double-right{
+        display: none;
+    }
+
+
 }

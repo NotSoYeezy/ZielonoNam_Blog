@@ -43,7 +43,8 @@
       </div>
       <main>
         <div class="post_cont" >
-            <h2 id="tittle">{{ post.title }} {% if not post.publish_date%}<a href="{% url 'Posts:post_publish' slug=post.slug %}">[Opublikuj]</a>{% endif %} {% if user.is_authenticated %}<a href="{% url 'Posts:post_delete' post.slug %}"><i class="fas fa-trash-alt"></i></a>{% endif %}</h2>
+            <h2 id="tittle">{{ post.title }} {% if not post.publish_date%}<a href="{% url 'Posts:post_publish' slug=post.slug %}">[Opublikuj]</a>{% endif %} </h2>
+            <span style="font-size: 35px">{% if user.is_authenticated %}<a href="{% url 'Posts:post_delete' post.slug %}"><i class="fas fa-trash-alt"></i></a><a href="{% url 'Posts:post_edit' post.slug %}"><i class="fa-solid fa-pen"></i></a>{% endif %}</span>
             <h2>Autor: <a href="#">{{ post.author }}</a></h2>
             <h2>Napisane: {{ post.create_date }}</h2>
             <hr>

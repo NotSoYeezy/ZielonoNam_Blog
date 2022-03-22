@@ -47,8 +47,13 @@
           </div>
         </div>
       </nav>
+          <div id="main_header">
+      </div>
       <main>
         <div class='main_cont'>
+            {% if not page_obj %}
+            <h1 style="font-size: 45px;">Brak postów!</h1>
+        {% endif %}
           <div class="arrow_div" id="back_div">{% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a>{% endif %}</div>
         {% for post in page_obj  %}
           <div class="post_div">
@@ -60,11 +65,15 @@
                 <span><h1 class="post_title">{{ post.title }}</h1><p class="post_date">{{ post.publish_date }}</p></span>
                 <a class="post_author">{{post.author.username}}</a>
                 <p class="post_text">
-                {{ post.content|slice:":100"|safe }}
-                 ... {% if post.publish_date %}<a href="{% url 'Posts:post_detail' slug=post.slug %}">Kliknij po więcej</a>
-                    {% else %} <a href="{% url 'Posts:post_draft_detail' slug=post.slug %}">Kliknij po więcej</a>
-                {% endif %}
+                {{ post.content|slice:":50"|safe }}
+                 ...
                 </p>
+              <span>
+              {% if post.publish_date %}
+                  <a href="{% url 'Posts:post_detail' slug=post.slug %}">Kliknij po więcej</a>{% else %}
+                  <a href="{% url 'Posts:post_draft_detail' slug=post.slug %}">Kliknij po więcej</a>
+                {% endif %}
+              </span>
               </div>
               {% endfor %}
             </div>
@@ -73,5 +82,12 @@
         </div>
       </main>
 </body>
+{% if not page_obj %}
+    <style>
+        body{
+            height: 100vh !important;
+        }
+    </style>
+{% endif %}
 <script src="{% static 'js/burger.js' %}"></script>
 </html>

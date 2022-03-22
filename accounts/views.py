@@ -8,6 +8,9 @@ from django.views.generic import View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .forms import UserRegisterForm, UserChangePasswordForm
+from .models import User
+from ZielonoNam.settings import PROFILE_PICS_DIR, storage
+from django.utils.text import slugify
 
 
 class UserLoginView(View):
@@ -15,7 +18,6 @@ class UserLoginView(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(password)
         user = authenticate(request=request ,username=username, password=password)
 
         if user is not None:
@@ -50,6 +52,11 @@ def user_register_view(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            file = request.FILES['profile_pic']
+            storage.child(PROFILE_PICS_DIR + file.name).put("media/profile_pics/" + file.name)
+            user_obj = User.objects.get(username=user_form.instance.username)
+            user_obj.pp_cdn_url = storage.child(PROFILE_PICS_DIR + file).get_url(None)
+            user_obj.save()
             return HttpResponseRedirect(reverse('accounts:login'))
         else:
             messages.info(request, user_form.errors)

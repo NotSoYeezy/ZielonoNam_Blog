@@ -44,7 +44,7 @@
       </div>
       <main>
         <div class="post_cont" style="text-align: center">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" autocomplete="off">
                 {{ form.as_p }}
                 {{ form.media }}
                 {% csrf_token %}

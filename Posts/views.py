@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, TemplateView, DeleteView
+from django.views.generic import DetailView, TemplateView, DeleteView, UpdateView
 from django.core.paginator import Paginator
 from .models import Post
 from django.contrib.auth.decorators import login_required
@@ -9,8 +9,7 @@ from django.shortcuts import reverse
 from .forms import PostCreateForm
 from ZielonoNam.settings import DEBUG
 from django.urls import reverse_lazy
-import pyrebase
-from django.core.files.storage import default_storage
+from django.utils.text import slugify
 
 # Importing config variables for FireBase
 from ZielonoNam.settings import THUMBNAILS_DIR, storage
@@ -77,9 +76,9 @@ def post_create_view(request):
         if form.is_valid():
             form.instance.author = request.user
             form.save()
-            file = request.FILES['thumbnail']
-            storage.child(THUMBNAILS_DIR + file.name).put("media/thumbnails/" + file.name)
             post = Post.objects.get(title=form.instance.title)
+            file = post.thumbnail
+            storage.child(THUMBNAILS_DIR + file.name).put("media/" + file.name)
             post.cdn_url = storage.child(THUMBNAILS_DIR + file.name).get_url(None)
             post.save()
             return HttpResponseRedirect(reverse('Posts:post_draft_list'))
@@ -92,4 +91,12 @@ def post_create_view(request):
 class PostDeleteView(DeleteView, LoginRequiredMixin):
     login_url = '/accounts/login/'
     model = Post
+    success_url = reverse_lazy('Posts:post_list')
+
+
+class PostEditView(UpdateView, LoginRequiredMixin):
+    login_url = '/accounts/login/'
+    model = Post
+    fields = ['title', 'content', 'thumbnail']
+    template_name = 'posts/post_add.html'
     success_url = reverse_lazy('Posts:post_list')
