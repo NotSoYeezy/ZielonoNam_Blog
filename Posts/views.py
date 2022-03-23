@@ -84,7 +84,7 @@ def post_create_view(request):
             post = Post.objects.get(title=form.instance.title)
             file = post.thumbnail
             storage.child(THUMBNAILS_DIR + file.name).put("media/" + file.name)
-            post.cdn_url = storage.child(THUMBNAILS_DIR + file.name).get_url(None)
+            post.cdn_url = storage.child(file.name).get_url(None)
             post.save()
             return HttpResponseRedirect(reverse('Posts:post_draft_list'))
         else:

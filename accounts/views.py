@@ -55,7 +55,7 @@ def user_register_view(request):
             user_obj = User.objects.get(username=user_form.instance.username)
             file = user_obj.profile_pic
             storage.child(PROFILE_PICS_DIR + file.name).put("media/" + file.name)
-            user_obj.pp_cdn_url = storage.child(PROFILE_PICS_DIR + file.name).get_url(None)
+            user_obj.pp_cdn_url = storage.child(file.name).get_url(None)
             user_obj.save()
             return HttpResponseRedirect(reverse('accounts:login'))
         else:
