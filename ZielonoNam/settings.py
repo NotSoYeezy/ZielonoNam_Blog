@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['zielononam.herokuapp.com', 'zielononam.live']
+ALLOWED_HOSTS = ['zielononam.herokuapp.com', 'zielononam.live', '127.0.0.1']
 
 
 # Application definition
@@ -123,7 +123,7 @@ PASSWORD_HASHERS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
-LOGIN_URL = 'user/login/'
+LOGIN_URL = '/user/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

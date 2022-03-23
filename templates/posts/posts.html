@@ -38,7 +38,7 @@
                 Login
               </a>
             {% endif %}
-              {% if user.is_authenticated %}
+              {% if user.is_superuser %}
             <a class="navbar-item" href="{% url 'Posts:post_create' %}">
                 Dodaj post
               </a>

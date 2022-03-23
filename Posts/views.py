@@ -2,14 +2,14 @@ from django.shortcuts import render
 from django.views.generic import DetailView, TemplateView, DeleteView, UpdateView
 from django.core.paginator import Paginator
 from .models import Post
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from .forms import PostCreateForm
-from ZielonoNam.settings import DEBUG
 from django.urls import reverse_lazy
-from django.utils.text import slugify
 
 # Importing config variables for FireBase
 from ZielonoNam.settings import THUMBNAILS_DIR, storage
@@ -26,6 +26,7 @@ def post_list_view(request):
     return render(request, 'posts/posts.html', {'page_obj': post})
 
 
+@user_passes_test(lambda u: u.is_superuser)
 @login_required()
 def post_draft_list_view(request):
     """Unpublished posts list view"""
@@ -48,8 +49,10 @@ class PostDetailView(DetailView):
         return queryset.filter(publish_date__isnull=False)
 
 
-class PostDraftDetailView(DetailView):
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
+class PostDraftDetailView(DetailView, LoginRequiredMixin):
     """Unpublished post DetailView"""
+    login_url = '/user/login/'
     model = Post
     template_name = 'posts/post_detail.html'
 
@@ -58,6 +61,7 @@ class PostDraftDetailView(DetailView):
         return queryset.filter(publish_date__isnull=True)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 @login_required
 def publish_post(request, slug):
     """Publishing post"""
@@ -67,6 +71,7 @@ def publish_post(request, slug):
     return HttpResponseRedirect(reverse('Posts:post_list'))
 
 
+@user_passes_test(lambda u: u.is_superuser)
 @login_required()
 def post_create_view(request):
     """Post creation view"""
@@ -88,14 +93,16 @@ def post_create_view(request):
         return render(request, 'posts/post_add.html', {'form': form})
 
 
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
 class PostDeleteView(DeleteView, LoginRequiredMixin):
-    login_url = '/accounts/login/'
+    login_url = '/user/login/'
     model = Post
     success_url = reverse_lazy('Posts:post_list')
 
 
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
 class PostEditView(UpdateView, LoginRequiredMixin):
-    login_url = '/accounts/login/'
+    login_url = '/user/login/'
     model = Post
     fields = ['title', 'content', 'thumbnail']
     template_name = 'posts/post_add.html'
