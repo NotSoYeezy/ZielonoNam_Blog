@@ -33,8 +33,7 @@ else:
     DEBUG = False
 
 ALLOWED_HOSTS = ['zielononam.herokuapp.com', 'zielononam.live', '127.0.0.1', 'www.zielononam.live']
-
-
+DEBUG_PROPAGATE_EXCEPTIONS = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -161,19 +160,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 PROFILE_PICS_DIR = config('PROFILE_PICS_DIR')
 THUMBNAILS_DIR = config('THUMBNAILS_DIR')
 
-config_debug = {
-    'apiKey': config('DEBUG_API_KEY'),
-    'authDomain': config('DEBUG_AUTH_DOMAIN'),
-    'projectId': config('DEBUG_PROJECT_ID'),
-    'storageBucket': config('DEBUG_STORAGE_BUCKET'),
-    'messagingSenderId': config('DEBUG_MSG_SNDR_ID'),
-    'appId': config('DEBUG_APP_ID'),
-    'measurementId': config('DEBUG_MEAS_ID'),
-    'databaseURL': config('DEBUG_DB_URL'),
-}
+if DEBUG:
+    PROFILE_PICS_DIR = config('PROFILE_PICS_DIR')
+    THUMBNAILS_DIR = config('THUMBNAILS_DIR')
 
-firebase = pyrebase.initialize_app(config_debug)
-storage = firebase.storage()
+    config_debug = {
+        'apiKey':  config('DEBUG_API_KEY'),
+        'authDomain': config('DEBUG_AUTH_DOMAIN'),
+        'projectId':  config('DEBUG_PROJECT_ID'),
+        'storageBucket':  config('DEBUG_STORAGE_BUCKET'),
+        'messagingSenderId': config('DEBUG_MSG_SNDR_ID'),
+        'appId': config('DEBUG_APP_ID'),
+        'measurementId': config('DEBUG_MEAS_ID'),
+        'databaseURL': config('DEBUG_DB_URL'),
+    }
+
+    firebase = pyrebase.initialize_app(config_debug)
+    storage = firebase.storage()
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
