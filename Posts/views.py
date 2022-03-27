@@ -11,6 +11,7 @@ from django.shortcuts import reverse
 from .forms import PostCreateForm
 from django.urls import reverse_lazy
 from django.contrib import messages
+import random
 
 # Importing config variables for FireBase
 from ZielonoNam.settings import THUMBNAILS_DIR, storage
@@ -81,14 +82,12 @@ def post_create_view(request):
         form = PostCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.instance.author = request.user
+            file = form.cleaned_data['thumbnail']
             form.save()
             post = Post.objects.get(title=form.instance.title)
-            file = post.thumbnail
-            storage.child(file.name).put("media/" + file.name)
-            print(file.name)
-            print(storage)
-            print(storage.child)
-            post.cdn_url = storage.child(file.name).get_url(None)
+            n = random.randint(2150, 195213)
+            storage.child(THUMBNAILS_DIR + f'{n}_{file.name}').put(file)
+            post.cdn_url = storage.child(THUMBNAILS_DIR + f'{n}_{file.name}').get_url(None)
             print(post.cdn_url)
             post.save()
             return HttpResponseRedirect(reverse('Posts:post_draft_list'))

@@ -9,7 +9,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=250, blank=False, null=False, unique=True)
     content = HTMLField()
-    thumbnail = models.ImageField(upload_to='thumbnails')
+  #  thumbnail = models.ImageField(upload_to='thumbnails')
     cdn_url = models.CharField(max_length=350)
     slug = models.SlugField(null=True, blank=True)
     create_date = models.DateField(auto_now_add=True)
