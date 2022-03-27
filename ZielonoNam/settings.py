@@ -160,7 +160,27 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 PROFILE_PICS_DIR = config('PROFILE_PICS_DIR')
 THUMBNAILS_DIR = config('THUMBNAILS_DIR')
 
+if not DEBUG:
+    """Config for development storage and environment"""
+    PROFILE_PICS_DIR = config('PROFILE_PICS_DIR')
+    THUMBNAILS_DIR = config('THUMBNAILS_DIR')
+
+    config_debug = {
+        'apiKey':  config('API_KEY'),
+        'authDomain': config('AUTH_DOMAIN'),
+        'projectId':  config('PROJECT_ID'),
+        'storageBucket':  config('STORAGE_BUCKET'),
+        'messagingSenderId': config('MSG_SNDR_ID'),
+        'appId': config('APP_ID'),
+        'measurementId': config('MEAS_ID'),
+        'databaseURL': config('DB_URL'),
+    }
+
+    firebase = pyrebase.initialize_app(config_debug)
+    storage = firebase.storage()
+
 if DEBUG:
+    """Config for production storage and environment """
     PROFILE_PICS_DIR = config('PROFILE_PICS_DIR')
     THUMBNAILS_DIR = config('THUMBNAILS_DIR')
 
@@ -174,7 +194,6 @@ if DEBUG:
         'measurementId': config('DEBUG_MEAS_ID'),
         'databaseURL': config('DEBUG_DB_URL'),
     }
-
     firebase = pyrebase.initialize_app(config_debug)
     storage = firebase.storage()
 
