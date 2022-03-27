@@ -103,6 +103,7 @@ class PostDeleteView(DeleteView, LoginRequiredMixin):
     login_url = '/user/login/'
     model = Post
     success_url = reverse_lazy('Posts:post_list')
+    template_name = 'posts/post_confirm_delete.html'
 
 
 @method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
