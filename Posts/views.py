@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from .forms import PostCreateForm
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 # Importing config variables for FireBase
 from ZielonoNam.settings import THUMBNAILS_DIR, storage
@@ -84,11 +85,16 @@ def post_create_view(request):
             post = Post.objects.get(title=form.instance.title)
             file = post.thumbnail
             storage.child(file.name).put("media/" + file.name)
+            print(file.name)
+            print(storage)
+            print(storage.child)
             post.cdn_url = storage.child(file.name).get_url(None)
+            print(post.cdn_url)
             post.save()
             return HttpResponseRedirect(reverse('Posts:post_draft_list'))
         else:
-            pass
+            messages.info(request, form.errors)
+            return render(request, 'posts/post_add.html', {'form': form})
     else:
         return render(request, 'posts/post_add.html', {'form': form})
 
