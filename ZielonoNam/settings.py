@@ -27,7 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if config("DEBUG") == 'True':
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['zielononam.herokuapp.com', 'zielononam.live', '127.0.0.1', 'www.zielononam.live']
 
