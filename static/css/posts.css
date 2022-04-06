@@ -72,6 +72,10 @@
     margin:0;
 }
 
+.mob_arr{
+    display: none;
+}
+
 @media (max-width:700px){
     .post_div{
         width: 450px;
@@ -94,6 +98,14 @@
 
     .fa-angle-double-right{
         display: none;
+    }
+
+    .fa-angle-double-left{
+        display: none;
+    }
+
+    .mob_arr{
+        display: inline;
     }
 
 
