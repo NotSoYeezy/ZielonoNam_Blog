@@ -65,10 +65,7 @@
               <div class="post_content">
                 <span><h1 class="post_title">{{ post.title }}</h1><p class="post_date">{{ post.publish_date }}</p></span>
                 <a class="post_author">{{post.author.username}}</a>
-                <p class="post_text">
-                {{ post.content|slice:":50"|safe }}
-                 ...
-                </p>
+              <hr>
               <span>
               {% if post.publish_date %}
                   <a href="{% url 'Posts:post_detail' slug=post.slug %}">Kliknij po więcej</a>{% else %}
