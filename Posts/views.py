@@ -110,6 +110,6 @@ class PostDeleteView(DeleteView, LoginRequiredMixin):
 class PostEditView(UpdateView, LoginRequiredMixin):
     login_url = '/user/login/'
     model = Post
-    fields = ['title', 'content', 'thumbnail']
+    fields = ['title', 'content']
     template_name = 'posts/post_add.html'
     success_url = reverse_lazy('Posts:post_list')
