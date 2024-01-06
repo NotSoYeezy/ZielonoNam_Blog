@@ -23,7 +23,7 @@ psycopg2==2.9.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
-pycryptodome==3.4.3
+pycryptodome==3.19.1
 pyparsing==3.0.7
 Pyrebase==3.0.27
 python-decouple==3.6
