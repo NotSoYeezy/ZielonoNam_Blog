@@ -28,7 +28,7 @@ pyparsing==3.0.7
 Pyrebase==3.0.27
 python-decouple==3.6
 python-jwt==2.0.1
-requests==2.11.1
+requests==2.32.2
 requests-toolbelt==0.7.0
 rsa==4.8
 six==1.16.0
@@ -37,3 +37,6 @@ stone==3.3.1
 tzdata==2021.5
 urllib3==1.26.8
 whitenoise==6.0
+future>=0.18.3 # not directly required, pinned by Snyk to avoid a vulnerability
+grpcio>=1.53.2 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
