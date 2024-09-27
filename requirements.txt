@@ -37,3 +37,4 @@ stone==3.3.1
 tzdata==2021.5
 urllib3==1.26.8
 whitenoise==6.0
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
